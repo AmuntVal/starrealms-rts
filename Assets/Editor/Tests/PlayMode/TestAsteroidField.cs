@@ -4,26 +4,23 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
-public class TestAsteroidField {
-	GameObject asteroidField = Resources.Load("Prefabs/Terrain/AsteroidField") as GameObject;
+public class TestAsteroidField: PrefabTest {
 
-	[SetUp]
-	public void SetUp() {
-		asteroidField = Resources.Load<GameObject>("Prefabs/Terrain/AsteroidField") as GameObject;
-		asteroidField = GameObject.Instantiate(asteroidField);
+	public TestAsteroidField() {
+		location = "Prefabs/Terrain/Asteroid";
 	}
 
 	[UnityTest]
-	public IEnumerator TestAsteroidRotatesItself() {
+	public IEnumerator TestAsteroidFieldRotatesItself() {
 
-		Quaternion initialRotation = asteroidField.transform.rotation;
+		Quaternion initialRotation = this.prefab.transform.rotation;
 
 		yield return null;
-		Assert.AreNotEqual(initialRotation, asteroidField.transform.rotation);
+		Assert.AreNotEqual(initialRotation, this.prefab.transform.rotation);
 	}
 
 	[Test]
 	public void TestAsteroidFieldContainsAsteroids() {
-		Assert.Greater(asteroidField.transform.childCount, 0);
+		Assert.Greater(this.prefab.transform.childCount, 0);
 	}
 }

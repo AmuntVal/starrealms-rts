@@ -4,27 +4,18 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
-public class TestAsteroid {
-	GameObject asteroid = Resources.Load("Prefabs/Terrain/Asteroid") as GameObject;
+public class TestAsteroid: PrefabTest {
 
-	[SetUp]
-	public void SetUp() {
-		asteroid = Resources.Load<GameObject>("Prefabs/Terrain/Asteroid") as GameObject;
-		asteroid = GameObject.Instantiate(asteroid);
-	}
-
-
-	[Test]
-	public void TestAsteroidExists() {
-		Assert.NotNull(asteroid);
+	public TestAsteroid() {
+		location = "Prefabs/Terrain/Asteroid";
 	}
 
 	[UnityTest]
 	public IEnumerator TestAsteroidRotatesItself() {
 
-		Quaternion initialRotation = asteroid.transform.rotation;
+		Quaternion initialRotation = this.prefab.transform.rotation;
 
 		yield return null;
-		Assert.AreNotEqual(initialRotation, asteroid.transform.rotation);
+		Assert.AreNotEqual(initialRotation, this.prefab.transform.rotation);
 	}
 }

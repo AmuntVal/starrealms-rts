@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 
 public class TestBattleScene {
 
-    string BattleSceneName = "MainScene";
+    string BattleSceneLocation = "Assets/Scenes/MainScene.unity";
 
     [Test]
     public void TestBattleSceneSimplePasses() {
@@ -17,7 +17,7 @@ public class TestBattleScene {
     [UnityTest]
     public IEnumerator TestBattleSceneBackgroundIsSet() {
       string expectedSkyboxName = "Green_1K_Resolution";
-      EditorSceneManager.OpenScene("Assets/Scenes/MainScene.unity");
+      EditorSceneManager.OpenScene(BattleSceneLocation);
       yield return null;
       Debug.Log(RenderSettings.skybox.name);
       Assert.AreEqual(RenderSettings.skybox.name, expectedSkyboxName);
